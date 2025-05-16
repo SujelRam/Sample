@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Animation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .card {
+            width: 300px;
+            height: 400px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.5s, box-shadow 0.5s;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border-radius: 50%;
+            animation: rotate 10s linear infinite;
+            z-index: -1;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .card-content {
+            position: relative;
+            z-index: 1;
+            padding: 40px;
+            text-align: center;
+            color: #333;
+        }
+        .card-content h2 {
+            font-size: 2em;
+            margin: 0;
+            color: #333;
+        }
+        .card-content p {
+            font-size: 1em;
+            color: #666;
+        }
+        .button {
+            margin-top: 20px;
+            background-color: #6a11cb;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #2575fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="card">
+        <div class="card-content">
+            <h2>Dynamic Animation</h2>
+            <p>Experience the beauty of seamless motion!</p>
+            <button class="button" onclick="showMessage()">Explore</button>
+        </div>
+    </div>
+    <script>
+        function showMessage() {
+            const card = document.getElementById('card');
+            const message = document.createElement('div');
+            message.className = 'message';
+            message.innerHTML = '<h3>Welcome to the World of Dynamic Effects!</h3><p>Enjoy the Motion!</p>';
+            message.style.position = 'absolute';
+            message.style.top = '50%';
+            message.style.left = '50%';
+            message.style.transform = 'translate(-50%, -50%)';
+            message.style.backgroundColor = '#ffffff';
+            message.style.padding = '20px 30px';
+            message.style.borderRadius = '20px';
+            message.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
+            message.style.textAlign = 'center';
+            message.style.zIndex = '2';
+            message.style.transition = 'opacity 0.5s';
+            card.appendChild(message);
+            setTimeout(() => message.style.opacity = '0', 3000);
+            setTimeout(() => card.removeChild(message), 3500);
+        }
+    </script>
+</body>
+</html>
